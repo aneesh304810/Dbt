@@ -1,0 +1,29 @@
+asset_cls_code,asset_cls_name,asset_cls_desc,parent_cls_code,hierarchy_level,is_active,create_ts,modify_ts,_loaded_at
+EQ,Equity,All equity instruments,,1,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+EQ_DOM,Equity Domestic,US domestic equities,EQ,2,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+EQ_INTL,Equity International,Developed international equities,EQ,2,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+EQ_EM,Equity Emerging Markets,Emerging market equities,EQ,2,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+EQ_LG,Equity Large Cap,Large capitalization equities,EQ_DOM,3,Y,2024-01-01 0:00:00,2024-06-15 0:00:00,2025-02-12 6:00:00
+EQ_SM,Equity Small Cap,Small and mid cap equities,EQ_DOM,3,Y,2024-01-01 0:00:00,2024-06-15 0:00:00,2025-02-12 6:00:00
+FI,Fixed Income,All fixed income instruments,,1,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+FI_GOV,Fixed Income Government,Government bonds and treasuries,FI,2,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+FI_CORP,Fixed Income Corporate,Investment grade and HY corporate bonds,FI,2,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+FI_MUNI,Fixed Income Municipal,Municipal bonds,FI,2,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+FI_HY,Fixed Income High Yield,High yield corporate bonds,FI_CORP,3,Y,2024-01-01 0:00:00,2024-03-10 0:00:00,2025-02-12 6:00:00
+FI_IG,Fixed Income Investment Grade,Investment grade corporate bonds,FI_CORP,3,Y,2024-01-01 0:00:00,2024-03-10 0:00:00,2025-02-12 6:00:00
+FI_MBS,Fixed Income Mortgage Backed,Agency and non-agency MBS,FI,2,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+FI_TIPS,Fixed Income Inflation Protected,TIPS and inflation-linked bonds,FI_GOV,3,Y,2024-01-01 0:00:00,2024-05-20 0:00:00,2025-02-12 6:00:00
+FI_INTL,Fixed Income International,International developed market bonds,FI,2,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+FI_EM,Fixed Income Emerging Markets,Emerging market sovereign and corporate debt,FI,2,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+ALT,Alternative,All alternative investments,,1,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+ALT_HF,Alternative Hedge Fund,Hedge fund strategies,ALT,2,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+ALT_PE,Alternative Private Equity,Private equity and venture capital,ALT,2,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+ALT_RE,Alternative Real Estate,Real estate and REITs,ALT,2,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+ALT_COMM,Alternative Commodities,Commodity funds and futures,ALT,2,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+ALT_INF,Alternative Infrastructure,Infrastructure investments,ALT,2,Y,2024-01-01 0:00:00,2024-07-01 0:00:00,2025-02-12 6:00:00
+CASH,Cash and Equivalents,Cash and short-term instruments,,1,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+MM,Money Market,Money market funds,CASH,2,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+CONV,Convertible Securities,Convertible bonds and notes,,1,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+PREF,Preferred Stock,Preferred equity securities,,1,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+MLT,Multi-Asset,Multi-asset and balanced strategies,,1,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
+OTH,Other / Unclassified,Unclassified or pending classification,,1,Y,2024-01-01 0:00:00,2024-01-01 0:00:00,2025-02-12 6:00:00
