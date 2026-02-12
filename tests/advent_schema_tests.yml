@@ -1,0 +1,50 @@
+version: 2
+
+# ═══════════════════════════════════════════════════════════
+# Custom Data Quality Tests
+#
+# These tests enforce cross-model referential integrity
+# and business rules that go beyond single-column checks.
+# ═══════════════════════════════════════════════════════════
+
+tests:
+  # ── Referential Integrity ──────────────────────────────
+  - name: assert_all_securities_have_asset_class_mapping
+    description: >
+      Every security in staging must resolve to an Advent asset class
+      in the mapping layer. If this fails, the crosswalk seed is
+      missing entries.
+    config:
+      severity: error
+      tags: ['data_quality', 'referential']
+    test:
+      dbt_utils.expression_is_true:
+        expression: "ASSET_CLASS_CODE is not null"
+        model: "{{ ref('advent_securities') }}"
+
+  # ── Completeness ───────────────────────────────────────
+  - name: assert_no_orphaned_sei_asset_classes
+    description: >
+      All active SEI asset classes should have a mapping in the crosswalk.
+      Orphans indicate missing seed data.
+    config:
+      severity: warn
+      tags: ['data_quality', 'completeness']
+    test:
+      dbt_utils.expression_is_true:
+        expression: "mapping_method != 'FALLBACK'"
+        model: "{{ ref('map_sei_to_advent_asset_class') }}"
+
+  # ── Row Count Sanity ───────────────────────────────────
+  - name: assert_mart_row_count_matches_staging
+    description: >
+      The mart output should have the same number of rows as staging.
+      A mismatch indicates dropped or duplicated records in the
+      transformation pipeline.
+    config:
+      severity: error
+      tags: ['data_quality', 'reconciliation']
+    test:
+      dbt_utils.equal_rowcount:
+        compare_model: "{{ ref('stg_sei_securities') }}"
+        model: "{{ ref('advent_securities') }}"

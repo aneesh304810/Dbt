@@ -1,0 +1,119 @@
+version: 2
+
+sources:
+  - name: sei_raw
+    description: >
+      Raw data ingested from the SEI accounting platform.
+      This is the system of record for all securities and asset-class data.
+    database: "{{ var('sei_database', 'sei_prod') }}"
+    schema: "{{ var('sei_schema', 'raw_sei') }}"
+    loader: SEI Data Feed
+    loaded_at_field: _loaded_at
+    freshness:
+      warn_after: { count: 24, period: hour }
+      error_after: { count: 48, period: hour }
+
+    tables:
+      - name: securities
+        description: >
+          SEI securities master table. Contains all security-level attributes
+          including identifiers, descriptions, pricing, and classification codes.
+        columns:
+          - name: sec_id
+            description: SEI internal security identifier (primary key)
+            tests:
+              - unique
+              - not_null
+          - name: sec_name
+            description: Security display name
+          - name: sec_desc
+            description: Full security description
+          - name: cusip_num
+            description: CUSIP identifier (9-character)
+          - name: isin_code
+            description: ISIN identifier (12-character)
+          - name: sedol_code
+            description: SEDOL identifier (7-character)
+          - name: ticker_sym
+            description: Trading ticker symbol
+          - name: sec_type_code
+            description: SEI security type classification code
+          - name: asset_cls_code
+            description: SEI asset class code (FK to asset_classes)
+          - name: sub_asset_cls_code
+            description: SEI sub-asset class code
+          - name: currency_code
+            description: Base currency ISO code
+          - name: country_code
+            description: Country of domicile ISO code
+          - name: issuer_name
+            description: Name of the issuing entity
+          - name: maturity_dt
+            description: Maturity date (fixed income)
+          - name: coupon_rate
+            description: Coupon rate (fixed income)
+          - name: price_amt
+            description: Current / latest price
+          - name: price_dt
+            description: Date of latest price
+          - name: mkt_cap_amt
+            description: Market capitalization amount
+          - name: sector_code
+            description: SEI sector classification code
+          - name: status_flag
+            description: Active/Inactive status indicator (A/I)
+          - name: create_ts
+            description: Record creation timestamp
+          - name: modify_ts
+            description: Record last modified timestamp
+          - name: _loaded_at
+            description: ETL load timestamp
+
+      - name: asset_classes
+        description: >
+          SEI asset class reference/hierarchy table. Defines the full
+          asset classification taxonomy used by SEI.
+        columns:
+          - name: asset_cls_code
+            description: SEI asset class code (primary key)
+            tests:
+              - unique
+              - not_null
+          - name: asset_cls_name
+            description: Asset class display name
+          - name: asset_cls_desc
+            description: Full asset class description
+          - name: parent_cls_code
+            description: Parent asset class code (self-referencing FK for hierarchy)
+          - name: hierarchy_level
+            description: Level in the classification hierarchy (1=top)
+          - name: is_active
+            description: Whether this classification is currently active (Y/N)
+          - name: create_ts
+            description: Record creation timestamp
+          - name: modify_ts
+            description: Record last modified timestamp
+          - name: _loaded_at
+            description: ETL load timestamp
+
+      - name: security_classifications
+        description: >
+          SEI security-to-classification junction table. Supports
+          multiple classification schemes per security.
+        columns:
+          - name: sec_id
+            description: Security identifier (FK to securities)
+            tests:
+              - not_null
+          - name: classification_scheme
+            description: Classification scheme name (e.g., 'GICS', 'SEI_INTERNAL')
+          - name: classification_code
+            description: Code within the scheme
+          - name: classification_name
+            description: Human-readable classification name
+          - name: effective_dt
+            description: Date this classification became effective
+          - name: end_dt
+            description: Date this classification was superseded (null if current)
+          - name: _loaded_at
+            description: ETL load timestamp

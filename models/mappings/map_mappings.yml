@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: map_sei_to_advent_asset_class
+    description: >
+      Central crosswalk mapping SEI asset class codes to Advent Advantage
+      asset class codes. Uses a three-tier resolution strategy:
+      (1) direct code match, (2) parent/top-level rollup, (3) fallback.
+      Each row includes the mapping_method for full auditability.
+    columns:
+      - name: sei_asset_class_code
+        description: SEI source asset class code (unique per row)
+        tests:
+          - unique
+          - not_null
+      - name: advent_asset_class
+        description: Resolved Advent Advantage asset class name
+        tests:
+          - not_null
+      - name: advent_asset_class_code
+        description: Resolved Advent Advantage asset class code
+        tests:
+          - not_null
+      - name: mapping_method
+        description: Which resolution tier was used
+        tests:
+          - accepted_values:
+              values: ['DIRECT', 'PARENT_ROLLUP', 'FALLBACK']

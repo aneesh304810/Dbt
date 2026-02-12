@@ -1,0 +1,103 @@
+version: 2
+
+models:
+  - name: advent_securities
+    description: >
+      Production-ready output table matching the Advent Advantage securities
+      schema exactly. This is the canonical compatibility layer between SEI
+      and all downstream consumers. Audit columns prefixed with underscore
+      are included for traceability but are NOT part of the Advent contract.
+    config:
+      tags: ['advent_compat', 'mart', 'critical']
+    columns:
+      - name: SECURITY_ID
+        description: Primary security identifier (Advent format)
+        tests:
+          - unique
+          - not_null
+
+      - name: CUSIP
+        description: CUSIP identifier (9-character, padded)
+        tests:
+          - dbt_utils.not_empty_string
+
+      - name: ISIN
+        description: ISIN identifier (12-character)
+
+      - name: SECURITY_NAME
+        description: Security display name
+        tests:
+          - not_null
+
+      - name: ASSET_CLASS_CODE
+        description: Advent Advantage asset class code
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - 'EQD'     # Equity - Domestic
+                - 'EQI'     # Equity - International
+                - 'EQEM'    # Equity - Emerging Markets
+                - 'EQSM'    # Equity - Small/Mid Cap
+                - 'EQLG'    # Equity - Large Cap
+                - 'FIG'     # Fixed Income - Government
+                - 'FIC'     # Fixed Income - Corporate
+                - 'FIM'     # Fixed Income - Municipal
+                - 'FIHY'    # Fixed Income - High Yield
+                - 'FIIG'    # Fixed Income - Investment Grade
+                - 'FIMB'    # Fixed Income - Mortgage-Backed
+                - 'FIAB'    # Fixed Income - Asset-Backed
+                - 'FITIP'   # Fixed Income - Inflation Protected
+                - 'FIIN'    # Fixed Income - International
+                - 'FIEM'    # Fixed Income - Emerging Markets
+                - 'AHFN'    # Alternative - Hedge Funds
+                - 'APRE'    # Alternative - Private Equity
+                - 'ARET'    # Alternative - Real Estate
+                - 'ACOM'    # Alternative - Commodities
+                - 'AINF'    # Alternative - Infrastructure
+                - 'CASH'    # Cash & Equivalents
+                - 'CONV'    # Convertible Securities
+                - 'PREF'    # Preferred Securities
+                - 'MLTB'    # Multi-Asset / Balanced
+                - 'OTHR'    # Other / Unclassified
+
+      - name: ASSET_CLASS
+        description: Advent Advantage asset class name
+        tests:
+          - not_null
+
+      - name: SECURITY_TYPE
+        description: Advent-compatible security type
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - 'EQUITY'
+                - 'FIXED_INCOME'
+                - 'OPTION'
+                - 'FUTURE'
+                - 'CASH_EQUIV'
+                - 'CONVERTIBLE'
+                - 'PREFERRED'
+                - 'ALTERNATIVE'
+                - 'OTHER'
+
+      - name: BASE_CURRENCY
+        description: ISO 4217 currency code (3-character)
+
+      - name: COUNTRY_CODE
+        description: ISO 3166-1 alpha-2 country code
+
+      - name: STATUS
+        description: Active/Inactive status flag (A/I/U)
+        tests:
+          - accepted_values:
+              values: ['A', 'I', 'U']
+
+      - name: _MAPPING_METHOD
+        description: >
+          Audit column showing which mapping tier resolved
+          the asset class (DIRECT, PARENT_ROLLUP, FALLBACK)
+        tests:
+          - accepted_values:
+              values: ['DIRECT', 'PARENT_ROLLUP', 'FALLBACK']

@@ -1,0 +1,27 @@
+sei_asset_class_code,sei_asset_class_desc,advent_asset_class,advent_asset_class_code,mapping_priority
+EQ_DOM,Equity Domestic,Equity - Domestic,EQD,1
+EQ_INTL,Equity International,Equity - International,EQI,1
+EQ_EM,Equity Emerging Markets,Equity - Emerging Markets,EQEM,1
+EQ_SM,Equity Small Cap,Equity - Small/Mid Cap,EQSM,1
+EQ_LG,Equity Large Cap,Equity - Large Cap,EQLG,1
+FI_GOV,Fixed Income Government,Fixed Income - Government,FIG,1
+FI_CORP,Fixed Income Corporate,Fixed Income - Corporate,FIC,1
+FI_MUNI,Fixed Income Municipal,Fixed Income - Municipal,FIM,1
+FI_HY,Fixed Income High Yield,Fixed Income - High Yield,FIHY,1
+FI_IG,Fixed Income Investment Grade,Fixed Income - Investment Grade,FIIG,1
+FI_MBS,Fixed Income Mortgage Backed,Fixed Income - Mortgage-Backed,FIMB,1
+FI_ABS,Fixed Income Asset Backed,Fixed Income - Asset-Backed,FIAB,1
+FI_TIPS,Fixed Income Inflation Protected,Fixed Income - Inflation Protected,FITIP,1
+FI_INTL,Fixed Income International,Fixed Income - International,FIIN,1
+FI_EM,Fixed Income Emerging Markets,Fixed Income - Emerging Markets,FIEM,1
+ALT_HF,Alternative Hedge Fund,Alternative - Hedge Funds,AHFN,1
+ALT_PE,Alternative Private Equity,Alternative - Private Equity,APRE,1
+ALT_RE,Alternative Real Estate,Alternative - Real Estate,ARET,1
+ALT_COMM,Alternative Commodities,Alternative - Commodities,ACOM,1
+ALT_INF,Alternative Infrastructure,Alternative - Infrastructure,AINF,1
+CASH,Cash and Equivalents,Cash & Equivalents,CASH,1
+MM,Money Market,Cash & Equivalents,CASH,2
+CONV,Convertible Securities,Convertible Securities,CONV,1
+PREF,Preferred Stock,Preferred Securities,PREF,1
+MLT,Multi-Asset,Multi-Asset / Balanced,MLTB,1
+OTH,Other / Unclassified,Other / Unclassified,OTHR,99

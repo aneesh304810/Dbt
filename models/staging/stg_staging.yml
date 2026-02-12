@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: stg_sei_securities
+    description: >
+      Cleaned and normalized SEI securities data. All field names are
+      standardized, codes are uppercased/trimmed, and types are cast
+      to consistent formats. This is the single staging entry point
+      for all security-level SEI data.
+    columns:
+      - name: security_id
+        description: SEI security identifier (primary key)
+        tests:
+          - unique
+          - not_null
+      - name: cusip
+        description: Normalized CUSIP (uppercase, trimmed)
+      - name: isin
+        description: Normalized ISIN (uppercase, trimmed)
+      - name: asset_class_code
+        description: SEI asset class code (joins to stg_sei_asset_class)
+        tests:
+          - not_null
+      - name: is_active
+        description: Boolean active/inactive flag
+
+  - name: stg_sei_asset_class
+    description: >
+      Cleaned and hierarchy-resolved SEI asset class reference data.
+      The recursive CTE resolves each class to its top-level parent
+      and builds a full hierarchy path for auditing.
+    columns:
+      - name: asset_class_code
+        description: SEI asset class code (primary key)
+        tests:
+          - unique
+          - not_null
+      - name: asset_class_name
+        description: Cleaned asset class display name
+        tests:
+          - not_null
+      - name: top_level_code
+        description: Resolved top-level parent asset class code
+      - name: hierarchy_path
+        description: >
+          Full path from top-level to this node
+          (e.g., "Equity > Domestic > Large Cap")
