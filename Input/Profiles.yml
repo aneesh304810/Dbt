@@ -1,0 +1,8 @@
+sei_to_advent:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "dbt_sei_to_advent.duckdb"
+      schema: main
+      threads: 4

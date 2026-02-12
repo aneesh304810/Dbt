@@ -1,0 +1,51 @@
+name: 'dbt_sei_to_advent'
+version: '1.0.0'
+config-version: 2
+
+profile: 'sei_to_advent'
+
+# DuckDB: no separate database needed
+# For production, update profile to point to your warehouse
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+vars:
+  # Toggle to enable/disable fallback mapping behavior
+  use_fallback_asset_class: true
+  fallback_asset_class_value: 'Other / Unclassified'
+
+models:
+  dbt_sei_to_advent:
+    sources:
+      +materialized: ephemeral
+    staging:
+      +materialized: view
+      +schema: staging
+      +tags: ['staging', 'sei']
+    mappings:
+      +materialized: table
+      +schema: mappings
+      +tags: ['mapping', 'crosswalk']
+    marts:
+      +materialized: table
+      +schema: marts
+      +tags: ['mart', 'advent_compat']
+
+seeds:
+  dbt_sei_to_advent:
+    seed_asset_class_crosswalk:
+      +column_types:
+        sei_asset_class_code: varchar(50)
+        sei_asset_class_desc: varchar(255)
+        advent_asset_class: varchar(255)
+        advent_asset_class_code: varchar(50)
+        mapping_priority: integer
