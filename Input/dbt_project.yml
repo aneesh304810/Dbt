@@ -49,3 +49,11 @@ seeds:
         advent_asset_class: varchar(255)
         advent_asset_class_code: varchar(50)
         mapping_priority: integer
+    seed_strategy_crosswalk:
+      +column_types:
+        sei_strategy_code: varchar(50)
+        sei_strategy_desc: varchar(255)
+        advent_asset_class_code: varchar(50)
+        advent_strategy_code: varchar(50)
+        advent_strategy_desc: varchar(255)
+        mapping_priority: integer
