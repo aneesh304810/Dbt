@@ -12,7 +12,11 @@
       - Classification values match Advent Advantage accepted values
       - ZERO SEI naming leakage in this output
     
-    Source: stg_sei_securities + map_sei_to_advent_asset_class
+    Includes:
+      - Level 1: Asset Class mapping
+      - Level 2: Strategy Code + Strategy Description mapping
+    
+    Source: stg_sei_securities + map_sei_to_advent_asset_class + map_sei_to_advent_strategy
     Grain: One row per security (SECURITY_ID)
 */
 
@@ -28,9 +32,14 @@ asset_class_map as (
 
 ),
 
+strategy_map as (
+
+    select * from {{ ref('map_sei_to_advent_strategy') }}
+
+),
+
 /*
-    Join securities to the asset class crosswalk.
-    Every security MUST resolve to an Advent asset class.
+    Join securities to both the L1 asset class and L2 strategy crosswalks.
 */
 joined as (
 
@@ -44,10 +53,13 @@ joined as (
         s.security_description,
         s.issuer,
         s.security_type_code,
-        s.asset_class_code          as sei_asset_class_code,    -- retained for audit only
+        s.asset_class_code          as sei_asset_class_code,
         m.advent_asset_class,
         m.advent_asset_class_code,
-        m.mapping_method,                                       -- retained for audit only
+        m.mapping_method            as asset_class_mapping_method,
+        sm.advent_strategy_code,
+        sm.advent_strategy_desc,
+        sm.strategy_mapping_method,
         s.sub_asset_class_code,
         s.sector_code,
         s.currency_iso,
@@ -64,6 +76,8 @@ joined as (
     from securities s
     left join asset_class_map m
         on s.asset_class_code = m.sei_asset_class_code
+    left join strategy_map sm
+        on s.security_id = sm.security_id
 
 ),
 
@@ -90,10 +104,14 @@ advent_output as (
         cast(security_description as varchar(255))  as SECURITY_DESCRIPTION,
         cast(issuer as varchar(100))                as ISSUER_NAME,
 
-        -- ── Asset Classification (Advent Values) ─────
+        -- ── Level 1: Asset Classification (Advent) ───
         cast(advent_asset_class_code as varchar(10))
                                                     as ASSET_CLASS_CODE,
         cast(advent_asset_class as varchar(100))    as ASSET_CLASS,
+
+        -- ── Level 2: Strategy (Advent) ───────────────
+        cast(advent_strategy_code as varchar(20))   as STRATEGY_CODE,
+        cast(advent_strategy_desc as varchar(255))  as STRATEGY_DESCRIPTION,
 
         -- ── Security Type (mapped to Advent codes) ───
         cast(
@@ -142,10 +160,11 @@ advent_output as (
             as char(1)
         )                                           as STATUS,
 
-        -- ── Audit / Metadata (not exposed downstream) ─
-        cast(mapping_method as varchar(20))         as _MAPPING_METHOD,
-        cast(sei_asset_class_code as varchar(50))   as _SEI_ASSET_CLASS_CODE,
-        current_timestamp                           as _TRANSFORMATION_TS
+        -- ── Audit / Metadata ─────────────────────────
+        cast(asset_class_mapping_method as varchar(20))   as _L1_MAPPING_METHOD,
+        cast(strategy_mapping_method as varchar(20))      as _L2_MAPPING_METHOD,
+        cast(sei_asset_class_code as varchar(50))         as _SEI_ASSET_CLASS_CODE,
+        current_timestamp                                 as _TRANSFORMATION_TS
 
     from joined
 

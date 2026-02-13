@@ -4,6 +4,9 @@ config-version: 2
 
 profile: 'sei_to_advent'
 
+# DuckDB: no separate database needed
+# For production, update profile to point to your warehouse
+
 model-paths: ["models"]
 analysis-paths: ["analyses"]
 test-paths: ["tests"]
@@ -45,4 +48,12 @@ seeds:
         sei_asset_class_desc: varchar(255)
         advent_asset_class: varchar(255)
         advent_asset_class_code: varchar(50)
+        mapping_priority: integer
+    seed_strategy_crosswalk:
+      +column_types:
+        sei_strategy_code: varchar(50)
+        sei_strategy_desc: varchar(255)
+        advent_asset_class_code: varchar(50)
+        advent_strategy_code: varchar(50)
+        advent_strategy_desc: varchar(255)
         mapping_priority: integer

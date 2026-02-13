@@ -1,27 +1,51 @@
-sei_asset_class_code,sei_asset_class_desc,advent_asset_class,advent_asset_class_code,mapping_priority
-EQ_DOM,Equity Domestic,Equity - Domestic,EQD,1
-EQ_INTL,Equity International,Equity - International,EQI,1
-EQ_EM,Equity Emerging Markets,Equity - Emerging Markets,EQEM,1
-EQ_SM,Equity Small Cap,Equity - Small/Mid Cap,EQSM,1
-EQ_LG,Equity Large Cap,Equity - Large Cap,EQLG,1
-FI_GOV,Fixed Income Government,Fixed Income - Government,FIG,1
-FI_CORP,Fixed Income Corporate,Fixed Income - Corporate,FIC,1
-FI_MUNI,Fixed Income Municipal,Fixed Income - Municipal,FIM,1
-FI_HY,Fixed Income High Yield,Fixed Income - High Yield,FIHY,1
-FI_IG,Fixed Income Investment Grade,Fixed Income - Investment Grade,FIIG,1
-FI_MBS,Fixed Income Mortgage Backed,Fixed Income - Mortgage-Backed,FIMB,1
-FI_ABS,Fixed Income Asset Backed,Fixed Income - Asset-Backed,FIAB,1
-FI_TIPS,Fixed Income Inflation Protected,Fixed Income - Inflation Protected,FITIP,1
-FI_INTL,Fixed Income International,Fixed Income - International,FIIN,1
-FI_EM,Fixed Income Emerging Markets,Fixed Income - Emerging Markets,FIEM,1
-ALT_HF,Alternative Hedge Fund,Alternative - Hedge Funds,AHFN,1
-ALT_PE,Alternative Private Equity,Alternative - Private Equity,APRE,1
-ALT_RE,Alternative Real Estate,Alternative - Real Estate,ARET,1
-ALT_COMM,Alternative Commodities,Alternative - Commodities,ACOM,1
-ALT_INF,Alternative Infrastructure,Alternative - Infrastructure,AINF,1
-CASH,Cash and Equivalents,Cash & Equivalents,CASH,1
-MM,Money Market,Cash & Equivalents,CASH,2
-CONV,Convertible Securities,Convertible Securities,CONV,1
-PREF,Preferred Stock,Preferred Securities,PREF,1
-MLT,Multi-Asset,Multi-Asset / Balanced,MLTB,1
-OTH,Other / Unclassified,Other / Unclassified,OTHR,99
+sei_strategy_code,sei_strategy_desc,advent_asset_class_code,advent_strategy_code,advent_strategy_desc,mapping_priority
+EQ_DOM_GRW,Domestic Equity Growth,EQD,EQD_GRW,Equity Domestic - Growth,1
+EQ_DOM_VAL,Domestic Equity Value,EQD,EQD_VAL,Equity Domestic - Value,1
+EQ_DOM_COR,Domestic Equity Core,EQD,EQD_COR,Equity Domestic - Core,1
+EQ_DOM_IDX,Domestic Equity Index,EQD,EQD_IDX,Equity Domestic - Index/Passive,1
+EQ_INTL_GRW,International Equity Growth,EQI,EQI_GRW,Equity International - Growth,1
+EQ_INTL_VAL,International Equity Value,EQI,EQI_VAL,Equity International - Value,1
+EQ_INTL_COR,International Equity Core,EQI,EQI_COR,Equity International - Core,1
+EQ_EM_GRW,Emerging Markets Growth,EQEM,EQEM_GRW,Equity Emerging Mkts - Growth,1
+EQ_EM_VAL,Emerging Markets Value,EQEM,EQEM_VAL,Equity Emerging Mkts - Value,1
+EQ_EM_COR,Emerging Markets Core,EQEM,EQEM_COR,Equity Emerging Mkts - Core,1
+EQ_SM_GRW,Small Cap Growth,EQSM,EQSM_GRW,Equity Small/Mid - Growth,1
+EQ_SM_VAL,Small Cap Value,EQSM,EQSM_VAL,Equity Small/Mid - Value,1
+EQ_LG_GRW,Large Cap Growth,EQLG,EQLG_GRW,Equity Large Cap - Growth,1
+EQ_LG_VAL,Large Cap Value,EQLG,EQLG_VAL,Equity Large Cap - Value,1
+EQ_LG_COR,Large Cap Core,EQLG,EQLG_COR,Equity Large Cap - Core,1
+FI_GOV_SHT,Government Short Duration,FIG,FIG_SHT,Fixed Income Govt - Short Duration,1
+FI_GOV_INT,Government Intermediate,FIG,FIG_INT,Fixed Income Govt - Intermediate,1
+FI_GOV_LNG,Government Long Duration,FIG,FIG_LNG,Fixed Income Govt - Long Duration,1
+FI_CORP_IG,Corporate Investment Grade,FIC,FIC_IG,Fixed Income Corp - Inv Grade,1
+FI_CORP_HY,Corporate High Yield,FIC,FIC_HY,Fixed Income Corp - High Yield,1
+FI_MUNI_SHT,Municipal Short Duration,FIM,FIM_SHT,Fixed Income Muni - Short Duration,1
+FI_MUNI_INT,Municipal Intermediate,FIM,FIM_INT,Fixed Income Muni - Intermediate,1
+FI_MUNI_LNG,Municipal Long Duration,FIM,FIM_LNG,Fixed Income Muni - Long Duration,1
+FI_MBS_AGN,MBS Agency,FIMB,FIMB_AGN,Fixed Income MBS - Agency,1
+FI_MBS_NON,MBS Non-Agency,FIMB,FIMB_NON,Fixed Income MBS - Non-Agency,1
+FI_TIPS_SHT,TIPS Short Duration,FITIP,FITIP_SHT,Fixed Income TIPS - Short Duration,1
+FI_TIPS_LNG,TIPS Long Duration,FITIP,FITIP_LNG,Fixed Income TIPS - Long Duration,1
+FI_INTL_DEV,International Developed,FIIN,FIIN_DEV,Fixed Income Intl - Developed,1
+FI_EM_HRD,EM Hard Currency,FIEM,FIEM_HRD,Fixed Income EM - Hard Currency,1
+FI_EM_LCL,EM Local Currency,FIEM,FIEM_LCL,Fixed Income EM - Local Currency,1
+ALT_HF_LS,Hedge Fund Long/Short,AHFN,AHFN_LS,Alt Hedge Fund - Long/Short Equity,1
+ALT_HF_MN,Hedge Fund Market Neutral,AHFN,AHFN_MN,Alt Hedge Fund - Market Neutral,1
+ALT_HF_MA,Hedge Fund Macro,AHFN,AHFN_MA,Alt Hedge Fund - Global Macro,1
+ALT_HF_EV,Hedge Fund Event Driven,AHFN,AHFN_EV,Alt Hedge Fund - Event Driven,1
+ALT_PE_BO,Private Equity Buyout,APRE,APRE_BO,Alt Private Equity - Buyout,1
+ALT_PE_VC,Private Equity Venture Capital,APRE,APRE_VC,Alt Private Equity - Venture Capital,1
+ALT_PE_GRW,Private Equity Growth,APRE,APRE_GRW,Alt Private Equity - Growth,1
+ALT_RE_COR,Real Estate Core,ARET,ARET_COR,Alt Real Estate - Core,1
+ALT_RE_OPP,Real Estate Opportunistic,ARET,ARET_OPP,Alt Real Estate - Opportunistic,1
+ALT_COMM_BRD,Commodities Broad,ACOM,ACOM_BRD,Alt Commodities - Broad Basket,1
+ALT_COMM_GLD,Commodities Gold/Precious,ACOM,ACOM_GLD,Alt Commodities - Gold/Precious Metals,1
+ALT_INF_COR,Infrastructure Core,AINF,AINF_COR,Alt Infrastructure - Core,1
+ALT_INF_OPP,Infrastructure Opportunistic,AINF,AINF_OPP,Alt Infrastructure - Opportunistic,1
+CASH_GOV,Cash Government,CASH,CASH_GOV,Cash - Government MM,1
+CASH_PRM,Cash Prime,CASH,CASH_PRM,Cash - Prime MM,1
+CONV_DEF,Convertible Default Strategy,CONV,CONV_DEF,Convertible - Default,1
+PREF_DEF,Preferred Default Strategy,PREF,PREF_DEF,Preferred - Default,1
+MLT_BAL,Multi-Asset Balanced,MLTB,MLTB_BAL,Multi-Asset - Balanced,1
+MLT_TAA,Multi-Asset Tactical,MLTB,MLTB_TAA,Multi-Asset - Tactical Allocation,1
+OTH_DEF,Other Default,OTHR,OTHR_DEF,Other - Unclassified,99
